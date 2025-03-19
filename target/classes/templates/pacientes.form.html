@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cadastro de Paciente</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h1>Cadastro de Paciente</h1>
+<form th:action="@{/pacientes/salvar}" th:object="${paciente}" method="post">
+    <input type="hidden" th:field="*{id}">
+
+    <label>Nome:</label>
+    <input type="text" th:field="*{nome}" required><br>
+
+    <label>Data de Nascimento:</label>
+    <!-- Campo para data e hora com o tipo datetime-local -->
+    <input type="datetime-local" th:field="*{dataNascimento}" required><br>
+
+    <label>CPF:</label>
+    <input type="text" th:field="*{cpf}" required><br>
+
+    <label>Carteirinha:</label>
+    <input type="number" th:field="*{carteirinha}" required><br>
+
+    <label>Telefone:</label>
+    <input type="text" th:field="*{telefone}" required><br>
+
+    <label>Email:</label>
+    <input type="email" th:field="*{email}" required><br>
+
+    <label>Endereço:</label>
+    <input type="text" th:field="*{endereco}" required><br>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<a href="/pacientes">Voltar</a>
+</body>
+</html>

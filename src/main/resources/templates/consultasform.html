@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Consulta</title>
+  <style>
+    body {
+        background-color: #2d2d2d; /* Fundo cinza escuro médio */
+        color: white;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    form {
+        background-color: #1a1a1a; /* Fundo mais escuro para o formulário */
+        padding: 30px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    h3 {
+        color: #50b3ff; /* Azul claro para o título */
+    }
+
+    label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        display: block;
+        color: #b0c4de; /* Azul claro para o texto */
+    }
+
+    select, input[type="text"], input[type="email"], input[type="date"], input[type="datetime-local"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        background-color: #333;
+        border: 1px solid #555;
+        border-radius: 5px;
+        color: white;
+    }
+
+    select:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="date"]:focus, input[type="datetime-local"]:focus {
+        outline: none;
+        border-color: #50b3ff; /* Azul claro ao focar nos campos */
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #50b3ff; /* Azul claro para o botão */
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #4092d8; /* Azul um pouco mais escuro ao passar o mouse */
+    }
+
+    button:focus {
+        outline: none;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <form th:action="@{/consultasView/salvar}" method="post" th:object="${consultaDTO}" xmlns:th="http://www.w3.org/1999/xhtml">
+    <label for="dentistaId">Escolha o Dentista</label>
+    <select id="dentistaId" name="dentistaId" th:field="*{dentistaId}">
+      <option th:each="dentista : ${dentistas}" th:value="${dentista.idDentista}" th:text="${dentista.nome}"></option>
+    </select>
+
+    <label for="dataConsulta">Data da Consulta</label>
+    <input type="datetime-local" id="dataConsulta" name="dataConsulta" th:field="*{dataConsulta}" required>
+
+    <label for="pacienteId">Escolha o Paciente</label>
+    <select id="pacienteId" name="pacienteId" th:field="*{pacienteId}" required>
+      <option th:each="paciente : ${pacientes}" th:value="${paciente.id}" th:text="${paciente.nome}"></option>
+    </select>
+
+    <label for="status">Status da Consulta</label>
+    <select id="status" name="status" th:field="*{status}" required>
+      <option value="AGENDADA">Agendada</option>
+      <option value="REALIZADA">Realizada</option>
+      <option value="CANCELADA">Cancelada</option>
+    </select>
+
+    <button type="submit">Salvar Consulta</button>
+  </form>
+</div>
+</body>
+</html>
