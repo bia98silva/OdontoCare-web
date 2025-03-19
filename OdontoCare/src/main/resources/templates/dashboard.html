@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <style>
+    body {
+      background-color: #222222;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3em;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      margin-top: 30px;
+      font-size: 2em;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: 20px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #003366;
+      color: white;
+      font-size: 1.1em;
+    }
+
+    td {
+      background-color: #f9f9f9;
+    }
+
+    a, .delete-btn {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 12px;
+      border-radius: 5px;
+      display: inline-block;
+    }
+
+    .edit-btn {
+      background-color: #003366;
+    }
+
+    .edit-btn:hover {
+      background-color: #002244;
+    }
+
+    .delete-btn {
+      background-color: #cc0000;
+      border: none;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background-color: #990000;
+    }
+
+    .nova-consulta {
+      display: inline-block;
+      margin-top: 30px;
+      background-color: #003366;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1.2em;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .nova-consulta:hover {
+      background-color: #002244;
+    }
+
+  </style>
+</head>
+<body>
+
+<h1>Dashboard</h1>
+
+<p>Total de Pacientes: <span th:text="${totalPacientes}"></span></p>
+<p>Total de Dentistas: <span th:text="${totalDentistas}"></span></p>
+<p>Total de Consultas: <span th:text="${totalConsultas}"></span></p>
+
+<h2>Consultas Cadastradas</h2>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Data</th>
+    <th>Status</th>
+    <th>Paciente</th>
+    <th>Dentista</th>
+    <th>Ações</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="consulta : ${consultas}">
+    <td th:text="${consulta.idConsulta}"></td>
+    <td th:text="${consulta.dataConsulta}"></td>
+    <td th:text="${consulta.status}"></td>
+    <td th:text="${consulta.paciente.nome}"></td>
+    <td th:text="${consulta.dentista.nome}"></td>
+    <td>
+      <a th:href="@{/consultasView/editar/{id}(id=${consulta.idConsulta})}" class="edit-btn">Editar</a>
+      <form th:action="@{/dashboard/excluir/{id}(id=${consulta.idConsulta})}" method="post" style="display:inline;">
+        <input type="hidden" name="_method" value="DELETE"/>
+        <button type="submit" class="delete-btn" onclick="return confirm('Tem certeza que deseja excluir esta consulta?');">Excluir</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<a class="nova-consulta" href="/consultasView/nova">Nova Consulta</a>
+
+</body>
+</html>

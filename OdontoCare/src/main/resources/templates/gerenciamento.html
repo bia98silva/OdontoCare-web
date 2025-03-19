@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Gerenciamento</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h1>Gerenciamento</h1>
+
+<h2>Pacientes</h2>
+<a th:href="@{/pacientes/novo}">Novo Paciente</a>
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Telefone</th>
+    <th>CPF</th>
+    <th>Ações</th>
+  </tr>
+  <tr th:each="paciente : ${pacientes}">
+    <td th:text="${paciente.nome}"></td>
+    <td th:text="${paciente.telefone}"></td>
+    <td th:text="${paciente.cpf}"></td>
+    <td>
+      <a th:href="@{/pacientes/editar/{id}(id=${paciente.id})}">Editar</a>
+      <a th:href="@{/pacientes/deletar/{id}(id=${paciente.id})}">Excluir</a>
+    </td>
+  </tr>
+</table>
+
+<h2>Consultas</h2>
+<a th:href="@{/consultasView/nova}">Nova Consulta</a>
+<table>
+  <tr>
+    <th>Paciente</th>
+    <th>Dentista</th>
+    <th>Data</th>
+    <th>Ações</th>
+  </tr>
+  <tr th:each="consulta : ${consultas}">
+    <td th:text="${consulta.paciente.nome}"></td>
+    <td th:text="${consulta.dentista.nome}"></td>
+    <td th:text="${consulta.dataConsulta != null ? consulta.dataConsulta : 'Data não disponível'}"></td>
+    <td>
+      <a th:href="@{/consultasView/editar/{id}(id=${consulta.id})}">Editar</a>
+      <a th:href="@{/consultasView/deletar/{id}(id=${consulta.id})}">Cancelar</a>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
