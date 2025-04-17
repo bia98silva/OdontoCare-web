@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Lista de Consultas</title>
+  <title th:text="#{page.title}">Lista de Consultas</title>
   <link rel="stylesheet" th:href="@{/css/styles.css}">
   <style>
     body {
@@ -83,16 +83,16 @@
 <body>
 
 <div class="container">
-  <h1>Lista de Consultas</h1>
+  <h1 th:text="#{page.title}">Lista de Consultas</h1>
   <table>
     <thead>
     <tr>
-      <th>ID</th>
-      <th>Data</th>
-      <th>Status</th>
-      <th>Paciente</th>
-      <th>Dentista</th>
-      <th>Ações</th>
+      <th th:text="#{table.id}">ID</th>
+      <th th:text="#{table.data}">Data</th>
+      <th th:text="#{table.status}">Status</th>
+      <th th:text="#{table.paciente}">Paciente</th>
+      <th th:text="#{table.dentista}">Dentista</th>
+      <th th:text="#{table.acoes}">Ações</th>
     </tr>
     </thead>
     <tbody>
@@ -103,15 +103,15 @@
       <td th:text="${consulta.paciente.nome}"></td>
       <td th:text="${consulta.dentista.nome}"></td>
       <td class="actions">
-        <a th:href="@{/consultasView/editar/{id}(id=${consulta.idConsulta})}">Editar</a>
+        <a th:href="@{/consultasView/editar/{id}(id=${consulta.idConsulta})}" th:text="#{table.editar}">Editar</a>
       </td>
     </tr>
     </tbody>
   </table>
 
   <!-- Botões estilizados -->
-  <a href="/consultasView/nova" class="button">Nova Consulta</a>
-  <a href="/dashboard" class="btn-voltar">Voltar ao Dashboard</a>
+  <a href="/consultasView/nova" class="button" th:text="#{button.nova.consulta}">Nova Consulta</a>
+  <a href="/dashboard" class="btn-voltar" th:text="#{button.voltar.dashboard}">Voltar ao Dashboard</a>
 </div>
 
 </body>
