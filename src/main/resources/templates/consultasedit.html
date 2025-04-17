@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Editar Consulta</title>
+  <title th:text="#{title}">Editar Consulta</title>
   <link rel="stylesheet" th:href="@{/css/styles.css}">
   <style>
     body {
@@ -69,43 +69,42 @@
 
 <body>
 
-<h1>Editar Consulta</h1>
+<h1 th:text="#{title}">Editar Consulta</h1>
 
-<!-- Ajuste do th:action para usar o caminho correto para atualização -->
+
 <form th:action="@{/consultasView/editar/{id}(id=${consultaDTO.idConsulta})}" th:object="${consultaDTO}" method="post">
 
-  <!-- Campo oculto para id da consulta -->
   <input type="hidden" th:field="*{idConsulta}"/>
 
-  <label for="dataConsulta">Data da Consulta:</label>
+  <label for="dataConsulta" th:text="#{dataConsulta}">Data da Consulta:</label>
   <input type="datetime-local" id="dataConsulta" th:field="*{dataConsulta}" required/>
 
-  <label for="status">Status:</label>
+  <label for="status" th:text="#{status}">Status:</label>
   <select id="status" th:field="*{status}">
-    <option value="Pendente" th:selected="${consultaDTO.status == 'Pendente'}">Pendente</option>
-    <option value="Confirmada" th:selected="${consultaDTO.status == 'Confirmada'}">Confirmada</option>
-    <option value="Cancelada" th:selected="${consultaDTO.status == 'Cancelada'}">Cancelada</option>
-    <option value="Agendada" th:selected="${consultaDTO.status == 'Agendada'}">Agendada</option>
+    <option value="Pendente" th:selected="${consultaDTO.status == 'Pendente'}" th:text="#{pendente}">Pendente</option>
+    <option value="Confirmada" th:selected="${consultaDTO.status == 'Confirmada'}" th:text="#{confirmada}">Confirmada</option>
+    <option value="Cancelada" th:selected="${consultaDTO.status == 'Cancelada'}" th:text="#{cancelada}">Cancelada</option>
+    <option value="Agendada" th:selected="${consultaDTO.status == 'Agendada'}" th:text="#{agendada}">Agendada</option>
   </select>
 
-  <label for="idDentista">Dentista:</label>
+  <label for="idDentista" th:text="#{dentista}">Dentista:</label>
   <select id="idDentista" th:field="*{dentistaId}">
     <option th:each="dentista : ${dentistas}" th:value="${dentista.idDentista}" th:text="${dentista.nome}"
             th:selected="${consultaDTO.dentistaId == dentista.idDentista}"></option>
   </select>
 
-  <label for="idPaciente">Paciente:</label>
+  <label for="idPaciente" th:text="#{paciente}">Paciente:</label>
   <select id="idPaciente" th:field="*{pacienteId}">
     <option th:each="paciente : ${pacientes}" th:value="${paciente.id}" th:text="${paciente.nome}"
             th:selected="${consultaDTO.pacienteId == paciente.id}"></option>
   </select>
 
-  <button type="submit">Salvar</button>
+  <button type="submit" th:text="#{salvar}">Salvar</button>
 
 </form>
 
 <br>
-<a href="/consultasView">Voltar à lista de consultas</a>
+<a href="/consultasView" th:text="#{voltar}">Voltar à lista de consultas</a>
 
 </body>
 </html>
