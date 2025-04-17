@@ -1,4 +1,4 @@
-package com.Fiap.OdontoCare.Exception;
+package com.Fiap.OdontoCare.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
